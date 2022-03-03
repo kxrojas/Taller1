@@ -29,7 +29,7 @@ public class ReadCSV {
             csvReader = new CSVReaderBuilder(arcCSV).withCSVParser(puntoComa).build();
             List<String[] > data =csvReader.readAll();
 
-            for (int i = 1; i < 99; i ++){
+            for (int i = 1; i < datos.size(); i ++){
 
                 int invoiceNo;
                 String stockCode;
@@ -81,7 +81,6 @@ public class ReadCSV {
                 datos.add(claseDatos);
             }
             datos.add(claseDatos);
-            System.out.println("fecha " + datos.get(0).getInvoiceDate());
         }
         catch (IOException ex){
             ex.printStackTrace();
