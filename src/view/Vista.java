@@ -12,4 +12,8 @@ public class Vista {
         String ms = JOptionPane.showInputDialog(mensaje);
         return Integer.parseInt(ms);
     }
+
+    public String leerString(String mensaje){
+        return JOptionPane.showInputDialog(mensaje);
+    }
 }

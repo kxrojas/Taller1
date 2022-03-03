@@ -6,11 +6,10 @@ public class Requerimientos {
 
     private ReadCSV readCSV = new ReadCSV();
 
-    public double sumTotalSales(ArrayList<Datos> datos) {
+    public double sumTotalSales(ArrayList<Datos> datos){
         double total = 0.0;
-        int length = datos.size() / 9;
-        for (int i = 0; i < length; i++) {
-            total += (datos.get(i).getQuantity() * datos.get(i).getUnitPrice());
+        for (Datos dato : datos) {
+            total += (dato.getQuantity() * dato.getUnitPrice());
         }
         return total;
     }

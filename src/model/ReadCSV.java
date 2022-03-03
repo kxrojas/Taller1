@@ -4,7 +4,6 @@ import com.opencsv.CSVParser;
 import com.opencsv.CSVParserBuilder;
 import com.opencsv.CSVReader;
 import com.opencsv.CSVReaderBuilder;
-import com.opencsv.exceptions.CsvException;
 
 import java.io.FileReader;
 import java.io.IOException;
@@ -21,37 +20,33 @@ public class ReadCSV {
 
     public void uploadData(){
 
-        FileReader arcCSV =null;
+        FileReader arcCSV = null;
         CSVReader csvReader = null;
 
-        try{
+        try {
             arcCSV = new FileReader("csv/data.csv");
-            CSVParser punto =new CSVParserBuilder().withSeparator(';').build();
-            csvReader = new CSVReaderBuilder(arcCSV).withCSVParser(punto).build();
-            List<String[] > data = csvReader.readAll();
+            CSVParser puntoComa = new CSVParserBuilder().withSeparator(';').build();
+            csvReader = new CSVReaderBuilder(arcCSV).withCSVParser(puntoComa).build();
+            List<String[] > data =csvReader.readAll();
 
-            for (int i = 1; i < datos.size(); i++){
+            for (int i = 1; i < 99; i ++){
 
-                long invoiceNo;
-                long stockCode;
+                int invoiceNo;
+                String stockCode;
                 String description;
                 double quantity;
                 Date invoiceDate;
                 double unitPrice;
-                long costumerID;
+                int costumerID;
                 String country;
 
-                try{
-                    invoiceNo = Long.parseLong(data.get(i)[0].split(",")[0]);
+                try {
+                    invoiceNo = Integer.parseInt(data.get(i)[0].split(",")[0]);
                 } catch (NumberFormatException n){
                     invoiceNo = 0;
                 }
-                try {
-                    stockCode = Long.parseLong(data.get(i)[1].split(",")[1]);
-                } catch (NumberFormatException n){
-                    stockCode = 0;
-                }
 
+                stockCode = data.get(i)[0].split(",")[1];
                 description =data.get(i)[0].split(",")[2];
 
                 try {
@@ -59,19 +54,23 @@ public class ReadCSV {
                 } catch (NumberFormatException n){
                     quantity = 0;
                 }
+
                 try {
-                    SimpleDateFormat fecha = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+                    SimpleDateFormat fecha = new SimpleDateFormat("MM/dd/yyyy");
                     invoiceDate = fecha.parse(data.get(i)[0].split(",")[4]);
-                } catch (ParseException p){
+                }
+                catch (ParseException p){
                     invoiceDate = null;
                 }
+
                 try {
                     unitPrice = Double.parseDouble(data.get(i)[0].split(",")[5]);
                 } catch (NumberFormatException n){
                     unitPrice = 0;
                 }
+
                 try {
-                    costumerID = Long.parseLong(data.get(i)[0].split(",")[6]);
+                    costumerID = Integer.parseInt(data.get(i)[0].split(",")[6]);
                 } catch (NumberFormatException n){
                     costumerID = 0;
                 }
@@ -81,15 +80,23 @@ public class ReadCSV {
                 claseDatos = new Datos(invoiceNo, stockCode, description, quantity, invoiceDate, unitPrice, costumerID, country);
                 datos.add(claseDatos);
             }
+            datos.add(claseDatos);
+            System.out.println("fecha " + datos.get(0).getInvoiceDate());
         }
-        catch (IOException | CsvException e){
+        catch (IOException ex){
+            ex.printStackTrace();
+        }
+        catch (Exception e){
             e.printStackTrace();
         }
-        try {
-            arcCSV.close();
-            csvReader.close();
-        } catch (IOException e){
-            e.printStackTrace();
+        finally {
+            try {
+                arcCSV.close();
+                csvReader.close();
+            }
+            catch (IOException e){
+                e.printStackTrace();
+            }
         }
     }
 
@@ -100,4 +107,6 @@ public class ReadCSV {
     public void setDatos(ArrayList<Datos> datos) {
         this.datos = datos;
     }
+
 }
+

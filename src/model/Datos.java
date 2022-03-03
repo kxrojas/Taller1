@@ -4,16 +4,16 @@ import java.util.Date;
 
 public class Datos {
 
-    private long invoiceNo;
-    private long stockCode;
+    private int invoiceNo;
+    private String stockCode;
     private String description;
     private double quantity;
     private Date invoiceDate;
     private double unitPrice;
-    private long costumerID;
+    private int costumerID;
     private String country;
 
-    public Datos(long invoiceNo, long stockCode, String description, double quantity, Date invoiceDate, double unitPrice, long costumerID, String country) {
+    public Datos(int invoiceNo, String stockCode, String description, double quantity, Date invoiceDate, double unitPrice, int costumerID, String country) {
         this.invoiceNo = invoiceNo;
         this.stockCode = stockCode;
         this.description = description;
@@ -24,19 +24,19 @@ public class Datos {
         this.country = country;
     }
 
-    public long getInvoiceNo() {
+    public int getInvoiceNo() {
         return invoiceNo;
     }
 
-    public void setInvoiceNo(long invoiceNo) {
+    public void setInvoiceNo(int invoiceNo) {
         this.invoiceNo = invoiceNo;
     }
 
-    public long getStockCode() {
+    public String getStockCode() {
         return stockCode;
     }
 
-    public void setStockCode(long stockCode) {
+    public void setStockCode(String stockCode) {
         this.stockCode = stockCode;
     }
 
@@ -72,11 +72,11 @@ public class Datos {
         this.unitPrice = unitPrice;
     }
 
-    public long getCostumerID() {
+    public int getCostumerID() {
         return costumerID;
     }
 
-    public void setCostumerID(long costumerID) {
+    public void setCostumerID(int costumerID) {
         this.costumerID = costumerID;
     }
 
@@ -92,7 +92,7 @@ public class Datos {
     public String toString() {
         return "Datos{" +
                 "invoiceNo=" + invoiceNo +
-                ", stockCode=" + stockCode +
+                ", stockCode='" + stockCode + '\'' +
                 ", description='" + description + '\'' +
                 ", quantity=" + quantity +
                 ", invoiceDate=" + invoiceDate +
